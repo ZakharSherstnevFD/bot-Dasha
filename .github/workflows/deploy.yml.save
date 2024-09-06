@@ -20,12 +20,11 @@ jobs:
 
     - name: Deploy to Server
       run: |
-        ssh -o StrictHostKeyChecking=no user@your-server-ip "cd /path/to/deployment && git pull origin main && npm install && npm run build"
+        ssh -o StrictHostKeyChecking=no deploy@192.168.1.100 << 'EOF'
+        cd /var/www/myproject
+        git pull origin main
+        npm install
+        npm run build
+        EOF
       env:
         SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-
-
-
-
-
-
